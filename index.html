@@ -29,12 +29,82 @@
 
             <!-- Menu rozwijane pod zębatką -->
             <div id="settings-menu" class="settings-menu">
-                <a href="#" class="menu-item">Now Playing</a>
-                <a href="#" class="menu-item">Saved</a>
-                <a href="#" class="menu-item">My Mood Stats</a>
-                <a href="#" class="menu-item">Jump to Date</a>
-                <a href="#" class="menu-item">Settings</a>
-                <a href="#" class="menu-item">About & Support</a>
+
+                <div id="menu-list-view" class="menu-list-view">
+                    <button type="button" class="menu-item" data-panel="why366">Why 366</button>
+                    <button type="button" class="menu-item" data-panel="about-author">About Author</button>
+                    <button type="button" class="menu-item" data-panel="my-moments">My Moments</button>
+                    <button type="button" class="menu-item" data-panel="settings-panel">Settings</button>
+                    <button type="button" class="menu-item" data-panel="version-feedback">Version & Feedback</button>
+                </div>
+
+                <div id="panel-why366" class="menu-detail-panel">
+                    <div class="menu-detail-body" id="why366-body"></div>
+                    <div class="menu-detail-nav">
+                        <button type="button" class="menu-nav-btn menu-back">‹ Back</button>
+                        <button type="button" class="menu-nav-btn menu-main">Main</button>
+                    </div>
+                </div>
+
+                <div id="panel-about-author" class="menu-detail-panel">
+                    <div class="menu-detail-body" id="about-author-body"></div>
+                    <div class="menu-detail-nav">
+                        <button type="button" class="menu-nav-btn menu-back">‹ Back</button>
+                        <button type="button" class="menu-nav-btn menu-main">Main</button>
+                    </div>
+                </div>
+
+                <div id="panel-my-moments" class="menu-detail-panel">
+                    <div class="menu-detail-body" id="my-moments-body"></div>
+                    <div class="menu-detail-nav">
+                        <button type="button" class="menu-nav-btn menu-back">‹ Back</button>
+                        <button type="button" class="menu-nav-btn menu-main">Main</button>
+                    </div>
+                </div>
+
+                <div id="panel-settings-panel" class="menu-detail-panel">
+                    <div class="menu-detail-body">
+                        <p class="menu-section-label">Appearance</p>
+                        <div class="menu-pill-row">
+                            <button type="button" class="menu-pill active" disabled>Nocturne</button>
+                            <button type="button" class="menu-pill" disabled>Sonata</button>
+                            <button type="button" class="menu-pill" disabled>Cello</button>
+                        </div>
+                        <p class="menu-hint">More themes — coming soon</p>
+
+                        <p class="menu-section-label">Daily reminder</p>
+                        <div class="menu-pill-row" id="reminder-row">
+                            <button type="button" class="menu-pill reminder-pill" data-hour="8">8:00</button>
+                            <button type="button" class="menu-pill reminder-pill" data-hour="12">12:00</button>
+                            <button type="button" class="menu-pill reminder-pill" data-hour="16">16:00</button>
+                            <button type="button" class="menu-pill reminder-pill" data-hour="20">20:00</button>
+                        </div>
+                        <p class="menu-hint">Notifications are not wired up yet — this just remembers your preference.</p>
+
+                        <p class="menu-section-label">Privacy</p>
+                        <p class="menu-privacy-text">We store everything — saved moments and preferences — only on your device. We do not track or sell your data.</p>
+                        <button type="button" id="clear-data-btn" class="menu-nav-btn menu-clear-btn">Clear My Data</button>
+                    </div>
+                    <div class="menu-detail-nav">
+                        <button type="button" class="menu-nav-btn menu-back">‹ Back</button>
+                        <button type="button" class="menu-nav-btn menu-main">Main</button>
+                    </div>
+                </div>
+
+                <div id="panel-version-feedback" class="menu-detail-panel">
+                    <div class="menu-detail-body">
+                        <p class="menu-section-label">Version</p>
+                        <p id="version-string" class="menu-version-text"></p>
+                        <p class="menu-section-label">Feedback</p>
+                        <p class="menu-hint">Have an idea, or found something broken? I'd genuinely like to hear it.</p>
+                        <a id="feedback-link" href="#" target="_blank" class="menu-nav-btn menu-feedback-btn">Send Feedback →</a>
+                    </div>
+                    <div class="menu-detail-nav">
+                        <button type="button" class="menu-nav-btn menu-back">‹ Back</button>
+                        <button type="button" class="menu-nav-btn menu-main">Main</button>
+                    </div>
+                </div>
+
             </div>
 
             <h1 id="composer-name">Ładowanie...</h1>

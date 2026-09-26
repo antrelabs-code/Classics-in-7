@@ -117,9 +117,52 @@ document.addEventListener("DOMContentLoaded", async () => {
             window.currentTrackSearchQuery = searchQuery;
         }
 
-        // Obsługa kliknięć dla trzech przycisków w jednej linii
+        function getSelectedTrack() {
+            return currentTracks.find(t => t.id === selectedTrackId) || currentTracks[0];
+        }
+
+        // --- My Moments: zapis lokalny (localStorage), bez backendu ---
+        const SAVED_KEY = "cif7_saved_moments";
+
+        function loadSavedMoments() {
+            try {
+                return JSON.parse(localStorage.getItem(SAVED_KEY)) || [];
+            } catch (e) {
+                return [];
+            }
+        }
+
+        function saveSavedMoments(list) {
+            try {
+                localStorage.setItem(SAVED_KEY, JSON.stringify(list));
+            } catch (e) {
+                console.error("Nie udało się zapisać My Moments:", e);
+            }
+        }
+
+        function momentKey(track) {
+            return `${composerName}::${track?.title}`;
+        }
+
         document.getElementById("btn-1").addEventListener("click", () => {
-            console.log("Save dla utworu:", currentTracks[0]?.title);
+            const track = getSelectedTrack();
+            if (!track) return;
+            const list = loadSavedMoments();
+            const key = momentKey(track);
+            if (list.some(m => m.key === key)) return; // już zapisane, bez duplikatu
+            list.unshift({
+                key,
+                artist: composerName,
+                title: track.title,
+                duration: track.duration || "",
+                mood: (track.mood_tags && track.mood_tags[0]) || ""
+            });
+            saveSavedMoments(list);
+
+            const saveBtn = document.getElementById("btn-1");
+            const original = saveBtn.textContent;
+            saveBtn.textContent = "Saved";
+            setTimeout(() => { saveBtn.textContent = original; }, 1200);
         });
 
         // PLAY ME — YouTube is the playback engine, but its visual player stays hidden.
@@ -311,7 +354,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
 
         document.getElementById("btn-3").addEventListener("click", async () => {
-            const track = currentTracks[0];
+            const track = getSelectedTrack();
             const shareText = `${track?.title || ""} — ${composerName}`;
             if (navigator.share) {
                 try {
@@ -336,7 +379,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
             const discoverLabelEl = document.getElementById("discover-more-label");
             if (discoverLabelEl) {
-                discoverLabelEl.textContent = `${subTracks.length} OTHER WORKS`;
+                discoverLabelEl.textContent = "OTHER WORKS";
             }
 
             subTracks.forEach((track) => {
@@ -428,17 +471,168 @@ document.addEventListener("DOMContentLoaded", async () => {
         const settingsBtn = document.getElementById("settings-btn");
         const settingsMenu = document.getElementById("settings-menu");
 
+        function closeSettingsMenu() {
+            settingsMenu.classList.remove("expanded");
+            settingsMenu.classList.remove("detail-open");
+            settingsBtn.classList.remove("active");
+            document.querySelectorAll(".menu-detail-panel.active").forEach(p => p.classList.remove("active"));
+        }
+
         settingsBtn.addEventListener("click", (e) => {
             e.stopPropagation();
-            settingsMenu.classList.toggle("expanded");
-            settingsBtn.classList.toggle("active");
+            const isOpening = !settingsMenu.classList.contains("expanded");
+            if (isOpening) {
+                settingsMenu.classList.add("expanded");
+                settingsBtn.classList.add("active");
+            } else {
+                closeSettingsMenu();
+            }
         });
 
         document.addEventListener("click", (e) => {
             if (!settingsMenu.contains(e.target) && e.target !== settingsBtn) {
-                settingsMenu.classList.remove("expanded");
-                settingsBtn.classList.remove("active");
+                closeSettingsMenu();
             }
+        });
+
+        // WHY 366 / ABOUT AUTHOR — treści statyczne (z paczki komunikacyjnej FB)
+        function textToParagraphs(text) {
+            return text.split(/\n\n+/).map(p => `<p>${p.replace(/\n/g, "<br>")}</p>`).join("");
+        }
+
+        const WHY_366_TEXT = `THE STORY BEHIND THE 366 DAYS
+
+The idea is simple: 366 days should give you 366 good reasons to listen to music.
+
+366 reasons — not 366 famous names. The calendar was not designed as an encyclopedia of composers or a list of birthdays. For every date, the starting question is: "Why this music, on this day?"
+
+A date may have several possible connections: a composer's birthday, a performer's birthday, a death anniversary, a premiere, an important concert, an anniversary connected with an ensemble or institution, or another meaningful musical event. The strongest reason is not always the most obvious one.
+
+THE "HOLE" PRINCIPLE
+
+One of the most important rules is also one of the simplest: a weak card is worse than an empty date. If a date does not have a sufficiently strong candidate, the process does not simply choose an obscure name to make the calendar look complete.
+
+WHY THE CALENDAR MATTERS
+
+A good card should make the decision easy: "I have a few minutes. What should I listen to today?" Here. One date. One story. One musical moment. Seven minutes.
+
+366 DAYS. 366 GOOD REASONS TO LISTEN.`;
+
+        const ABOUT_AUTHOR_TEXT = `The 366-day calendar started with a simple question: what would I like to find when I open a music app on an ordinary day?
+
+I love music, and I enjoy building things with code. I've been teaching myself to code in my spare time, after work, and Classics in 7 grew out of that combination. There was no big team behind it.
+
+I was originally looking for something like this for myself — a small, quiet way to discover or revisit classical music without falling into endless browsing, recommendations, notifications and noise.
+
+I didn't want 366 famous names just because they had birthdays. I wanted 366 genuine reasons to listen. That meant researching dates, comparing candidates, checking facts, and sometimes deciding that a date simply wasn't strong enough. I've spent many evenings doing that work.
+
+The result is still an experiment. I don't know yet whether Classics in 7 will become a daily habit for anyone other than me. That is exactly what I'm trying to find out.
+
+If you're here, I hope you find something worth listening to today.
+
+— The creator of Classics in 7`;
+
+        document.getElementById("why366-body").innerHTML = textToParagraphs(WHY_366_TEXT);
+        document.getElementById("about-author-body").innerHTML = textToParagraphs(ABOUT_AUTHOR_TEXT);
+
+        // MY MOMENTS — renderowane na nowo za każdym otwarciem (dane mogły się zmienić)
+        function renderMyMoments() {
+            const body = document.getElementById("my-moments-body");
+            const list = loadSavedMoments();
+
+            if (list.length === 0) {
+                body.innerHTML = `<p class="saved-empty">Nothing saved yet.<br>Tap Save on a piece you'd like to remember.</p>`;
+                return;
+            }
+
+            body.innerHTML = list.map(m => `
+                <div class="saved-item" data-key="${m.key}">
+                    <p class="saved-item-artist">${m.artist}</p>
+                    <p class="saved-item-title">${m.title}</p>
+                    <p class="saved-item-meta">${[m.duration, m.mood].filter(Boolean).join(" · ")}</p>
+                    <div class="saved-item-actions">
+                        <button type="button" class="unsave-btn" data-key="${m.key}">Unsave</button>
+                        <button type="button" class="moment-share-btn" data-key="${m.key}">Share</button>
+                    </div>
+                </div>
+            `).join("");
+
+            body.querySelectorAll(".unsave-btn").forEach(btn => {
+                btn.addEventListener("click", () => {
+                    const remaining = loadSavedMoments().filter(m => m.key !== btn.dataset.key);
+                    saveSavedMoments(remaining);
+                    renderMyMoments();
+                });
+            });
+
+            body.querySelectorAll(".moment-share-btn").forEach(btn => {
+                btn.addEventListener("click", async () => {
+                    const moment = loadSavedMoments().find(m => m.key === btn.dataset.key);
+                    if (!moment) return;
+                    // Inny tekst niż na ekranie głównym — bez linku do instalacji apki.
+                    const shareText = `I listened to ${moment.title} by ${moment.artist}. You might like it too.`;
+                    if (navigator.share) {
+                        try { await navigator.share({ text: shareText }); }
+                        catch (err) { if (err.name !== "AbortError") console.error(err); }
+                    } else {
+                        try { await navigator.clipboard.writeText(shareText); }
+                        catch (err) { console.error(err); }
+                    }
+                });
+            });
+        }
+
+        // SETTINGS — przypominajka (UI, zapamiętane lokalnie, bez realnych powiadomień jeszcze)
+        const REMINDER_KEY = "cif7_reminder_hour";
+        const reminderPills = document.querySelectorAll(".reminder-pill");
+        const savedHour = localStorage.getItem(REMINDER_KEY);
+        reminderPills.forEach(pill => {
+            if (pill.dataset.hour === savedHour) pill.classList.add("active");
+            pill.addEventListener("click", () => {
+                reminderPills.forEach(p => p.classList.remove("active"));
+                pill.classList.add("active");
+                localStorage.setItem(REMINDER_KEY, pill.dataset.hour);
+            });
+        });
+
+        document.getElementById("clear-data-btn").addEventListener("click", () => {
+            const ok = window.confirm(
+                "We store everything only on your device. We do not track or sell your data.\n\n" +
+                "This will permanently erase your saved moments and preferences from this app. Proceed?"
+            );
+            if (ok) {
+                localStorage.clear();
+                renderMyMoments();
+                reminderPills.forEach(p => p.classList.remove("active"));
+            }
+        });
+
+        // VERSION & FEEDBACK
+        document.getElementById("version-string").textContent =
+            `v1.0 · built ${new Date().toISOString().slice(0, 10)}`;
+        // TODO: podmień na właściwy link do Google Form, gdy będzie gotowy.
+        document.getElementById("feedback-link").href = "https://forms.gle/REPLACE_WITH_YOUR_FORM";
+
+        // NAWIGACJA: kliknięcie pozycji z listy -> pokaż panel; Back -> wróć do listy; Main -> zamknij całe menu
+        document.querySelectorAll(".menu-item").forEach(item => {
+            item.addEventListener("click", () => {
+                const panelId = "panel-" + item.dataset.panel;
+                settingsMenu.classList.add("detail-open");
+                document.querySelectorAll(".menu-detail-panel").forEach(p => p.classList.remove("active"));
+                document.getElementById(panelId).classList.add("active");
+                if (item.dataset.panel === "my-moments") renderMyMoments();
+            });
+        });
+
+        document.querySelectorAll(".menu-back").forEach(btn => {
+            btn.addEventListener("click", () => {
+                settingsMenu.classList.remove("detail-open");
+                document.querySelectorAll(".menu-detail-panel").forEach(p => p.classList.remove("active"));
+            });
+        });
+
+        document.querySelectorAll(".menu-main").forEach(btn => {
+            btn.addEventListener("click", closeSettingsMenu);
         });
 
     } catch (error) {

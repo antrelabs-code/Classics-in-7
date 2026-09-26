@@ -89,9 +89,199 @@ body {
     display: flex;
 }
 
+.menu-list-view {
+    display: flex;
+    flex-direction: column;
+}
+
+.settings-menu.detail-open .menu-list-view {
+    display: none;
+}
+
+.menu-detail-panel {
+    display: none;
+    flex-direction: column;
+    padding: 4px 16px 12px;
+    box-sizing: border-box;
+}
+
+.menu-detail-panel.active {
+    display: flex;
+}
+
+.menu-detail-body {
+    font-size: 0.82rem;
+    line-height: 1.6;
+    color: #cccccc;
+    max-height: 46vh;
+    overflow-y: auto;
+    margin-bottom: 12px;
+    padding-right: 4px;
+}
+
+.menu-detail-body p {
+    margin: 0 0 10px 0;
+}
+
+.menu-detail-body p:last-child {
+    margin-bottom: 0;
+}
+
+.menu-detail-nav {
+    display: flex;
+    gap: 8px;
+    padding-top: 10px;
+    border-top: 1px solid #333333;
+}
+
+.menu-nav-btn {
+    flex: 1;
+    text-align: center;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #333333;
+    background: #262626;
+    color: #d4af37;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+.menu-nav-btn:hover {
+    background: #2e2e2e;
+}
+
+.menu-section-label {
+    font-size: 0.68rem;
+    letter-spacing: 1.1px;
+    text-transform: uppercase;
+    color: #d4af37;
+    font-weight: 700;
+    margin: 14px 0 6px 0 !important;
+}
+
+.menu-section-label:first-child {
+    margin-top: 0 !important;
+}
+
+.menu-pill-row {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.menu-pill {
+    font-size: 0.72rem;
+    padding: 6px 10px;
+    border-radius: 8px;
+    border: 1px solid #333333;
+    background: #1a1a1a;
+    color: #999999;
+    cursor: pointer;
+}
+
+.menu-pill.active {
+    color: #d4af37;
+    border-color: #d4af37;
+}
+
+.menu-pill:disabled {
+    cursor: default;
+}
+
+.menu-hint {
+    font-size: 0.68rem;
+    color: #777777;
+    margin: 6px 0 0 0 !important;
+}
+
+.menu-privacy-text {
+    font-size: 0.78rem;
+    color: #aaaaaa;
+    line-height: 1.5;
+}
+
+.menu-clear-btn {
+    color: #e0392c;
+    margin-top: 4px;
+}
+
+.menu-clear-btn:hover {
+    background: rgba(224, 57, 44, 0.08);
+}
+
+.menu-version-text {
+    font-size: 0.78rem;
+    color: #999999;
+}
+
+.menu-feedback-btn {
+    display: block;
+    margin-top: 4px;
+}
+
+/* Karty w My Moments */
+.saved-empty {
+    font-size: 0.82rem;
+    color: #888888;
+    text-align: center;
+    padding: 20px 0;
+}
+
+.saved-item {
+    border: 1px solid #333333;
+    border-radius: 8px;
+    padding: 10px 12px;
+    margin-bottom: 8px;
+}
+
+.saved-item-artist {
+    color: #d4af37;
+    font-weight: 700;
+    font-size: 0.78rem;
+    margin: 0 0 2px 0 !important;
+}
+
+.saved-item-title {
+    color: #f0f0f0;
+    font-size: 0.85rem;
+    margin: 0 0 2px 0 !important;
+}
+
+.saved-item-meta {
+    color: #888888;
+    font-size: 0.7rem;
+    margin: 0 0 8px 0 !important;
+}
+
+.saved-item-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.saved-item-actions button {
+    flex: 1;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    padding: 7px;
+    border-radius: 6px;
+    border: 1px solid #333333;
+    background: #1a1a1a;
+    color: #cccccc;
+    cursor: pointer;
+}
+
 /* Styl pozycji menu (baza pod zmianę wielkości czcionki) */
 .menu-item {
     display: block;
+    width: 100%;
+    box-sizing: border-box;
     padding: 12px 16px;
     color: #cccccc;
     text-decoration: none;
@@ -99,6 +289,11 @@ body {
     font-weight: 500;
     letter-spacing: 0.08em;
     text-transform: uppercase;
+    background: transparent;
+    border: none;
+    text-align: left;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
     transition: background 0.15s ease, color 0.15s ease;
 }
 
