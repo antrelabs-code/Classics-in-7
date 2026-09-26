@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Classics in 7</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Zakładki górne: DAY CARD (aktywna) / MOVIE (przyszłość, nieaktywna) -->
+        <div class="top-tabs">
+            <span class="top-tab active">DAY CARD</span>
+            <span class="top-tab disabled">MOVIE</span>
+        </div>
+
+        <!-- Górna sekcja w ramce -->
+        <div class="composer-header-card">
+            <!-- Nagłówek z zębatką w prawym górnym rogu -->
+            <div class="header-top-row">
+                <span id="anchor-badge"></span>
+                <button id="settings-btn" class="settings-btn" aria-label="Menu ustawień">
+                    <svg class="gear-icon" viewBox="0 0 24 24" width="28" height="28" stroke="currentColor" stroke-width="1.3" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="3"></circle>
+                        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Menu rozwijane pod zębatką -->
+            <div id="settings-menu" class="settings-menu">
+                <a href="#" class="menu-item">Now Playing</a>
+                <a href="#" class="menu-item">Saved</a>
+                <a href="#" class="menu-item">My Mood Stats</a>
+                <a href="#" class="menu-item">Jump to Date</a>
+                <a href="#" class="menu-item">Settings</a>
+                <a href="#" class="menu-item">About & Support</a>
+            </div>
+
+            <h1 id="composer-name">Ładowanie...</h1>
+            <p id="composer-meta"></p>
+            <p id="event-note" style="display:none;"></p>
+        </div>
+
+        <!-- PANEL 2: lewa strona = kontekst (ARTIST / CELEBRATION / ANNIVERSARY: opis), prawa = MORE BELOW -->
+        <div class="about-panel">
+            <div class="bio-wrap">
+                <p class="artist-bio">
+                    <span id="about-panel-title" class="about-label">ARTIST:</span>
+                    <span id="composer-bio"></span>
+                </p>
+            </div>
+            <button id="bio-toggle" class="bio-toggle-btn">
+                <span class="toggle-group">
+                    <span id="bio-toggle-arrow" class="bio-toggle-arrow">▼</span>
+                    <span id="bio-toggle-label">CONTINUE READING</span>
+                </span>
+            </button>
+        </div>
+
+        <!-- Główny utwór w dedykowanej ramce -->
+        <div id="main-track-card" class="main-track-card">
+            <p class="my-moment-eyebrow">MY MOMENT<span class="pulse-dot"></span></p>
+            <h3 id="main-track-title" class="main-track-title"></h3>
+            
+            <div class="main-track-sub-header">
+                <div></div>
+                <div class="track-right-column">
+                    <span id="main-track-duration" class="track-duration"></span>
+                    <div id="main-track-moods" class="mood-tags-container-right"></div>
+                </div>
+            </div>
+
+            <p id="main-track-fact" class="track-fact"></p>
+            
+            <div id="main-track-actions" class="track-actions">
+                <div class="action-row">
+                    <button id="btn-1" class="btn-custom btn-1">Save</button>
+                    <button id="btn-2" class="btn-custom btn-2" aria-label="Play selected track"><span class="play-primary">PLAY ME</span><span class="play-secondary" hidden>STOP</span></button>
+                    <button id="btn-3" class="btn-custom btn-3">Share</button>
+                </div>
+            </div>
+
+            <!-- Discover More żyje wewnątrz karty My Moment -->
+            <div class="discover-more-section">
+                <button id="discover-toggle" class="discover-toggle-btn">
+                    <span class="toggle-group">
+                        <span id="discover-arrow">▼</span>
+                        <span id="discover-more-label">5 OTHER WORKS</span>
+                    </span>
+                </button>
+                <div id="discover-content" class="discover-content">
+                    <div id="tracks-container"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PANEL 4: Go Deeper — osobna belka na dole, jak było -->
+        <a id="wiki-link" href="#" target="_blank" class="go-deeper-bar">
+            <svg class="external-link-icon" viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                <polyline points="15 3 21 3 21 9"></polyline>
+                <line x1="10" y1="14" x2="21" y2="3"></line>
+            </svg>
+            <span id="go-deeper-label">READ MORE</span>
+        </a>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
