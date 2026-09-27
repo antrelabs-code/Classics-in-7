@@ -1,11 +1,5 @@
-Classics in 7 — CSS-03 checkpoint
+# Classics in 7 — CSS-10
 
-Changes:
-- CSS-01 tokens retained
-- CSS-02 duplicate rules retained/merged
-- CSS-03 stylesheet reordered into clear sections
-- no visual redesign intended
-- CONTINUE READING / OTHER WORKS collapse state retained
-- action-row/playback fix retained
+Menu typography scale increased as a system, while main card typography (Artist / Insight etc.) is intentionally unchanged.
 
-This is a refactor checkpoint, not the final MVP.
+My Moments text is increased separately because it contains nested cards and was visually too small.

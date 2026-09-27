@@ -73,10 +73,10 @@
 
     /* Menu typography: kept independent so future skins can scale the menu
        without changing the main card typography. */
-    --menu-font-xs: 0.72rem;
-    --menu-font-sm: 0.80rem;
-    --menu-font-body: 0.90rem;
-    --menu-font-item: 0.96rem;
+    --menu-font-xs: 0.76rem;
+    --menu-font-sm: 0.88rem;
+    --menu-font-body: 1.00rem;
+    --menu-font-item: 1.02rem;
 
     --line-height-tight: 1.35;
     --line-height-normal: 1.5;
@@ -992,3 +992,50 @@ iframe[src*="youtube.com/embed/"] {
     overflow: hidden !important;
 }
 
+
+/* ========================================
+   CSS-09 — final menu readability pass
+======================================== */
+
+/* Feedback action should read as a real action, not as helper text. */
+.menu-feedback-btn {
+    font-size: var(--menu-font-body);
+    font-weight: 600;
+    padding: 10px 12px;
+}
+
+/* My Moments: nested cards need more breathing room and larger text. */
+#panel-my-moments .saved-item-artist {
+    font-size: 1.02rem;
+}
+
+#panel-my-moments .saved-item-title {
+    font-size: 0.98rem;
+    line-height: 1.45;
+}
+
+#panel-my-moments .saved-item-meta {
+    font-size: 0.82rem;
+    line-height: 1.45;
+}
+
+/* Settings gets the full available vertical space; the panel itself scrolls
+   instead of being visually clipped near the bottom of the viewport. */
+.settings-menu.detail-open {
+    max-height: calc(100dvh - 62px);
+}
+
+#panel-settings-panel .menu-detail-body {
+    max-height: calc(100dvh - 150px);
+    overflow-y: auto;
+}
+
+/* Gear always returns to its neutral position when the menu closes. */
+.settings-btn .gear-icon {
+    transform: rotate(0deg);
+    transform-origin: center;
+}
+
+.settings-btn.active .gear-icon {
+    transform: rotate(45deg);
+}
