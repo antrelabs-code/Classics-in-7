@@ -85,8 +85,13 @@ document.addEventListener("DOMContentLoaded", async () => {
         const bioToggle = document.getElementById("bio-toggle");
         const bioWrap = document.querySelector(".bio-wrap");
         if (bioToggle && bioWrap) {
+            const bioToggleLabel = document.getElementById("bio-toggle-label");
             bioToggle.addEventListener("click", () => {
-                bioWrap.classList.toggle("expanded");
+                const expanded = bioWrap.classList.toggle("expanded");
+                if (bioToggleLabel) {
+                    bioToggleLabel.textContent = expanded ? "COLLAPSE" : "CONTINUE READING";
+                }
+                bioToggle.setAttribute("aria-expanded", String(expanded));
             });
         }
 
@@ -416,9 +421,14 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         function setDiscoverExpanded(expanded, onComplete = null) {
             const beforeHeight = discoverWrapper.getBoundingClientRect().height;
+            const discoverLabel = document.getElementById("discover-more-label");
 
             discoverContent.classList.toggle("expanded", expanded);
             discoverArrow.style.transform = expanded ? "rotate(180deg)" : "rotate(0deg)";
+            if (discoverLabel) {
+                discoverLabel.textContent = expanded ? "COLLAPSE" : "OTHER WORKS";
+            }
+            discoverToggle.setAttribute("aria-expanded", String(expanded));
 
             // Anchored from the bottom: after the CSS transition finishes,
             // scroll by the exact added/removed height so the lower edge stays

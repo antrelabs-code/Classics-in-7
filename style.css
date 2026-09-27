@@ -816,7 +816,9 @@ body {
 /* Trzy akcje w jednej linii: Save/Share są odrobinę węższe,
    a główny PLAY ME dostaje więcej miejsca. */
 .action-row {
+    display: flex;
     width: 100%;
+    gap: var(--space-3);
     align-items: stretch;
 }
 
