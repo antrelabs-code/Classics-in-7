@@ -8,18 +8,18 @@
 </head>
 <body>
     <div class="app-container">
-        <!-- Zakładki górne: DAY CARD (aktywna) / MOVIE (przyszłość, nieaktywna) -->
+        <!-- Top tabs: DAY CARD (active) / MOVIE (future, inactive) -->
         <div class="top-tabs">
             <span class="top-tab active">DAY CARD</span>
             <span class="top-tab disabled">MOVIE</span>
         </div>
 
-        <!-- Górna sekcja w ramce -->
+        <!-- Framed header section -->
         <div class="composer-header-card">
-            <!-- Nagłówek z zębatką w prawym górnym rogu -->
+            <!-- Header with gear icon in the top-right corner -->
             <div class="header-top-row">
                 <span id="anchor-badge"></span>
-                <button id="settings-btn" class="settings-btn" aria-label="Menu ustawień">
+                <button id="settings-btn" class="settings-btn" aria-label="Settings menu">
                     <svg class="gear-icon" viewBox="0 0 24 24" width="28" height="28" stroke="currentColor" stroke-width="1.3" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <circle cx="12" cy="12" r="3"></circle>
                         <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
@@ -27,7 +27,7 @@
                 </button>
             </div>
 
-            <!-- Menu rozwijane pod zębatką -->
+            <!-- Dropdown menu under the gear icon -->
             <div id="settings-menu" class="settings-menu">
 
                 <div id="menu-list-view" class="menu-list-view">
@@ -107,7 +107,7 @@
 
             </div>
 
-            <h1 id="composer-name">Ładowanie...</h1>
+            <h1 id="composer-name">Loading…</h1>
             <p id="composer-meta"></p>
             <p id="event-note" style="display:none;"></p>
         </div>
@@ -128,7 +128,7 @@
             </button>
         </div>
 
-        <!-- Główny utwór w dedykowanej ramce -->
+        <!-- Main track in its own framed card -->
         <div id="main-track-card" class="main-track-card">
             <p class="my-moment-eyebrow">MY MOMENT<span class="pulse-dot"></span></p>
             <h3 id="main-track-title" class="main-track-title"></h3>
@@ -151,7 +151,7 @@
                 </div>
             </div>
 
-            <!-- Discover More żyje wewnątrz karty My Moment -->
+            <!-- Discover More lives inside the My Moment card -->
             <div class="discover-more-section">
                 <button id="discover-toggle" class="discover-toggle-btn">
                     <span class="toggle-group">
@@ -165,7 +165,7 @@
             </div>
         </div>
 
-        <!-- PANEL 4: Go Deeper — osobna belka na dole, jak było -->
+        <!-- PANEL 4: Go Deeper — its own bar at the bottom, as before -->
         <a id="wiki-link" href="#" target="_blank" class="go-deeper-bar">
             <svg class="external-link-icon" viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
@@ -176,6 +176,6 @@
         </a>
     </div>
 
-    <script src="app.js"></script>
+    <script type="module" src="card.js"></script>
 </body>
 </html>

@@ -20,7 +20,7 @@ body {
     min-height: calc(100vh - 32px);
 }
 
-/* Ramka dla górnej sekcji kompozytora */
+/* Frame for the top composer section */
 .composer-header-card {
     background: #1a1a1a;
     border-radius: 12px;
@@ -30,14 +30,14 @@ body {
     position: relative;
 }
 
-/* Górny rząd w karcie: odznaka + przycisk zębatki */
+/* Top row in the card: badge + gear button */
 .header-top-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-/* Styl przycisku z zębatką */
+/* Gear button style */
 .settings-btn {
     background: transparent;
     border: 1px solid transparent;
@@ -70,7 +70,7 @@ body {
     transform: rotate(45deg);
 }
 
-/* Styl rozwijanego menu pod zębatką */
+/* Dropdown menu style under the gear icon */
 .settings-menu {
     display: none;
     flex-direction: column;
@@ -280,7 +280,7 @@ body {
     cursor: pointer;
 }
 
-/* Styl pozycji menu (baza pod zmianę wielkości czcionki) */
+/* Menu item style (base for font-size scaling) */
 .menu-item {
     display: block;
     width: 100%;
@@ -326,7 +326,7 @@ body {
     margin: 2px 0 0 0;
 }
 
-/* Zakładki górne: DAY CARD / MOVIE (stub, przygotowane pod przyszłość) */
+/* Top tabs: DAY CARD / MOVIE (stub, prepared for the future) */
 .top-tabs {
     display: flex;
     gap: 6px;
@@ -378,7 +378,7 @@ body {
     margin-right: 4px;
 }
 
-/* Bio rozwija się w miejscu, w dół — bez scrollowania do niej, karta po prostu rośnie. */
+/* Bio expands in place, downward — no scrolling to it, the card simply grows. */
 .bio-wrap {
     max-height: 5.7em;
     overflow: hidden;
@@ -437,7 +437,7 @@ body {
     gap: 7px;
 }
 
-/* Pulsująca kropka - jak REC w kamerze: "to jest twój moment, teraz" */
+/* Pulsing dot - like REC on a camera: "this is your moment, now" */
 .pulse-dot {
     width: 10px;
     height: 10px;
@@ -505,8 +505,8 @@ body {
     flex-shrink: 0;
 }
 
-/* Discover More żyje teraz wewnątrz main-track-card, więc nie potrzebuje
-   własnego tła/ramki/notcha — tylko cienkiego separatora od reszty karty. */
+/* Discover More now lives inside main-track-card, so it no longer needs
+   its own background/border/notch — just a thin separator from the rest of the card. */
 .discover-more-section {
     margin: 10px -16px -14px -16px;
     border-top: 1px solid #2a2a2a;
@@ -545,7 +545,7 @@ body {
     transform: translate(1px, -1px);
 }
 
-/* Wspólny układ przycisków dolnych sekcji */
+/* Shared layout for the bottom section buttons */
 .discover-toggle-btn {
     width: 100%;
     min-height: 56px;
@@ -575,7 +575,7 @@ body {
     transition: transform 0.3s ease;
 }
 
-/* Styl eleganckiej ikony zewnętrznego linku. */
+/* Style for the elegant external-link icon. */
 .external-link-icon {
     stroke: #d4af37;
     flex-shrink: 0;
@@ -706,7 +706,7 @@ body {
     margin: 8px 0 14px 0;
 }
 
-/* „Insight:” ma dokładnie ten sam kolor i styl etykiety co „Bio:”. */
+/* "Insight:" uses exactly the same color and label style as "Bio:". */
 .track-fact strong {
     color: #d4af37;
     font-weight: 700;
@@ -759,8 +759,8 @@ body {
     font-weight: 700;
 }
 
-/* Trzy akcje w jednej linii: Save/Share są odrobinę węższe,
-   a główny PLAY ME dostaje więcej miejsca. */
+/* Three actions in one row: Save/Share are a bit narrower,
+   while the main PLAY ME button gets more room. */
 .action-row {
     width: 100%;
     align-items: stretch;
@@ -775,8 +775,8 @@ body {
     flex: 1 1 auto;
 }
 
-/* PLAY ME pozostaje jednym wspólnym przyciskiem. W trybie playback
-   dzieli się tylko cienką kreską na PAUSE/RESUME i STOP. */
+/* PLAY ME stays a single unified button. In playback mode it only
+   splits with a thin line into PAUSE/RESUME and STOP. */
 .btn-custom.btn-2.is-split {
     display: grid;
     grid-template-columns: 1fr 1fr;
