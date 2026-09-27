@@ -621,11 +621,11 @@ body {
     align-items: center;
     justify-content: flex-end;
     gap: var(--space-3);
-    width: calc(100% - (2 * var(--content-gutter)));
+    width: calc(100% - var(--content-gutter));
     box-sizing: border-box;
     padding: var(--space-5) var(--content-gutter);
-    margin: 0 var(--content-gutter) 16px var(--content-gutter);
-    transform: translateX(4px);
+    margin: 0 0 16px var(--content-gutter);
+    transform: none;
     background: transparent;
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
