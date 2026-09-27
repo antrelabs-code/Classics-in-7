@@ -665,6 +665,15 @@ body {
     background: rgba(255, 255, 255, 0.02);
 }
 
+/* When expanded, COLLAPSE sits directly after the last work instead of
+   leaving the full closed-state control height as empty vertical space.
+   The closed state keeps the larger touch target. */
+.discover-content.expanded + .discover-toggle-btn {
+    min-height: 42px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
 #discover-arrow {
     display: inline-block;
     font-size: var(--font-size-lg);
