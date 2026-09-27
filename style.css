@@ -53,6 +53,9 @@
     --space-8: 20px;
     --space-9: 24px;
 
+    /* Shared horizontal content edge for secondary controls. */
+    --content-gutter: 16px;
+
     --radius-sm: 6px;
     --radius-md: 8px;
     --radius-lg: 10px;
@@ -456,7 +459,7 @@ body {
     background: var(--color-surface);
     border-radius: var(--radius-xl);
     border: 1px solid var(--color-border);
-    padding: 8px 16px 8px;
+    padding: 8px var(--content-gutter) 8px;
     margin-bottom: var(--space-3);
 }
 
@@ -606,7 +609,7 @@ body {
 /* Discover More żyje teraz wewnątrz main-track-card, więc nie potrzebuje
    własnego tła/ramki/notcha — tylko cienkiego separatora od reszty karty. */
 .discover-more-section {
-    margin: 10px -16px -14px -16px;
+    margin: 10px 0 -14px 0;
     border-top: 1px solid var(--color-border);
     overflow: hidden;
     position: relative;
@@ -618,10 +621,10 @@ body {
     align-items: center;
     justify-content: flex-end;
     gap: var(--space-3);
-    width: 100%;
+    width: calc(100% - (2 * var(--content-gutter)));
     box-sizing: border-box;
-    padding: var(--space-5) 16px;
-    margin-bottom: 16px;
+    padding: var(--space-5) var(--content-gutter);
+    margin: 0 var(--content-gutter) 16px var(--content-gutter);
     background: transparent;
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
@@ -650,7 +653,7 @@ body {
     background: transparent;
     border: none;
     color: var(--color-accent);
-    padding: var(--space-5) 16px;
+    padding: var(--space-5) 0;
     font-family: var(--font-family-base);
     cursor: pointer;
     display: flex;
@@ -701,7 +704,7 @@ body {
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    padding: 0 16px;
+    padding: 0 var(--content-gutter);
 }
 
 
@@ -711,7 +714,7 @@ body {
 
 .discover-content.expanded {
     max-height: 1200px;
-    padding: 0 16px 16px 16px;
+    padding: 0 var(--content-gutter) 16px var(--content-gutter);
 }
 
 .track-card {
