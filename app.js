@@ -1,3 +1,12 @@
+import {
+    loadSavedMoments,
+    saveSavedMoments,
+    getMomentKey,
+    getReminderHour,
+    setReminderHour,
+    clearAppStorage
+} from "./storage.js";
+
 document.addEventListener("DOMContentLoaded", async () => {
     try {
         const response = await fetch("muz-content.json");
@@ -117,38 +126,11 @@ document.addEventListener("DOMContentLoaded", async () => {
             window.currentTrackSearchQuery = searchQuery;
         }
 
-        function getSelectedTrack() {
-            return currentTracks.find(t => t.id === selectedTrackId) || currentTracks[0];
-        }
-
-        // --- My Moments: zapis lokalny (localStorage), bez backendu ---
-        const SAVED_KEY = "cif7_saved_moments";
-
-        function loadSavedMoments() {
-            try {
-                return JSON.parse(localStorage.getItem(SAVED_KEY)) || [];
-            } catch (e) {
-                return [];
-            }
-        }
-
-        function saveSavedMoments(list) {
-            try {
-                localStorage.setItem(SAVED_KEY, JSON.stringify(list));
-            } catch (e) {
-                console.error("Nie udało się zapisać My Moments:", e);
-            }
-        }
-
-        function momentKey(track) {
-            return `${composerName}::${track?.title}`;
-        }
-
         document.getElementById("btn-1").addEventListener("click", () => {
             const track = getSelectedTrack();
             if (!track) return;
             const list = loadSavedMoments();
-            const key = momentKey(track);
+            const key = getMomentKey(composerName, track);
             if (list.some(m => m.key === key)) return; // już zapisane, bez duplikatu
             list.unshift({
                 key,
@@ -583,15 +565,14 @@ If you're here, I hope you find something worth listening to today.
         }
 
         // SETTINGS — przypominajka (UI, zapamiętane lokalnie, bez realnych powiadomień jeszcze)
-        const REMINDER_KEY = "cif7_reminder_hour";
         const reminderPills = document.querySelectorAll(".reminder-pill");
-        const savedHour = localStorage.getItem(REMINDER_KEY);
+        const savedHour = getReminderHour();
         reminderPills.forEach(pill => {
             if (pill.dataset.hour === savedHour) pill.classList.add("active");
             pill.addEventListener("click", () => {
                 reminderPills.forEach(p => p.classList.remove("active"));
                 pill.classList.add("active");
-                localStorage.setItem(REMINDER_KEY, pill.dataset.hour);
+                setReminderHour(pill.dataset.hour);
             });
         });
 
@@ -601,7 +582,7 @@ If you're here, I hope you find something worth listening to today.
                 "This will permanently erase your saved moments and preferences from this app. Proceed?"
             );
             if (ok) {
-                localStorage.clear();
+                clearAppStorage();
                 renderMyMoments();
                 reminderPills.forEach(p => p.classList.remove("active"));
             }

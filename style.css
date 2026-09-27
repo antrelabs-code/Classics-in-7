@@ -1,31 +1,101 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
+/* ========================================
+   TOKENS — CSS-01
+   Values mirror the existing visual system.
+   Change tokens first; components should not
+   need separate restyling for future themes.
+======================================== */
+:root {
+    --font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+    --color-bg: #121212;
+    --color-surface: #1a1a1a;
+    --color-surface-raised: #222222;
+    --color-surface-hover: #262626;
+    --color-surface-tag: #2b2b2b;
+
+    --color-text: #e0e0e0;
+    --color-text-strong: #ffffff;
+    --color-text-body: #bbbbbb;
+    --color-text-muted: #999999;
+    --color-text-soft: #888888;
+    --color-text-faint: #777777;
+    --color-text-disabled: #666666;
+    --color-text-bright: #f0f0f0;
+    --color-text-mid: #b0b0b0;
+    --color-text-light: #aaaaaa;
+    --color-border-active: #444444;
+    --color-surface-hover-strong: #303030;
+
+    --color-accent: #d4af37;
+    --color-danger: #e0392c;
+
+    --color-border: #2a2a2a;
+    --color-border-strong: #333333;
+    --color-border-subtle: #2e2e2e;
+
+    --color-accent-soft: rgba(212, 175, 55, 0.08);
+    --color-accent-hover: rgba(212, 175, 55, 0.10);
+    --color-danger-soft: rgba(224, 57, 44, 0.08);
+
+    --space-1: 4px;
+    --space-2: 6px;
+    --space-3: 8px;
+    --space-4: 10px;
+    --space-5: 12px;
+    --space-6: 14px;
+    --space-7: 16px;
+    --space-8: 20px;
+    --space-9: 24px;
+
+    --radius-sm: 6px;
+    --radius-md: 8px;
+    --radius-lg: 10px;
+    --radius-xl: 12px;
+
+    --font-size-xs: 0.68rem;
+    --font-size-sm: 0.72rem;
+    --font-size-md: 0.78rem;
+    --font-size-body: 0.82rem;
+    --font-size-lg: 0.85rem;
+    --font-size-copy: 0.95rem;
+    --font-size-title: 1.02rem;
+    --font-size-display: 1.15rem;
+    --font-size-name: 2rem;
+
+    --line-height-tight: 1.35;
+    --line-height-normal: 1.5;
+    --line-height-relaxed: 1.6;
+}
+
 html {
     min-height: 100%;
 }
 
 body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    background-color: #121212;
-    color: #e0e0e0;
+    font-family: var(--font-family-base);
+    background-color: var(--color-bg);
+    color: var(--color-text);
     margin: 0;
-    padding: 16px;
+    padding: 5px 5px env(safe-area-inset-bottom, 20px) 5px;
     min-height: 100vh;
+    min-width: 100%;
     box-sizing: border-box;
 }
 
 .app-container {
     width: 100%;
     max-width: none;
-    min-height: calc(100vh - 32px);
+    min-height: 100vh;
 }
 
 /* Ramka dla górnej sekcji kompozytora */
 .composer-header-card {
-    background: #1a1a1a;
-    border-radius: 12px;
-    border: 1px solid #2a2a2a;
-    padding: 10px 16px 8px;
+    background: var(--color-surface);
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--color-border);
+    padding: var(--space-4) 16px 8px;
     margin-bottom: 4px;
     position: relative;
 }
@@ -43,7 +113,7 @@ body {
     border: 1px solid transparent;
     cursor: pointer;
     padding: 6px;
-    border-radius: 8px;
+    border-radius: var(--radius-md);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -51,7 +121,7 @@ body {
 }
 
 .gear-icon {
-    stroke: #d4af37;
+    stroke: var(--color-accent);
     transition: filter 0.2s ease;
 }
 
@@ -63,7 +133,7 @@ body {
 .settings-btn:hover,
 .settings-btn.active {
     background: rgba(212, 175, 55, 0.08);
-    border: 1px solid #d4af37;
+    border: 1px solid var(--color-accent);
     transform: rotate(45deg);
 }
 
@@ -71,15 +141,15 @@ body {
 .settings-menu {
     display: none;
     flex-direction: column;
-    background: #222222;
-    border-radius: 8px;
+    background: var(--color-surface-raised);
+    border-radius: var(--radius-md);
     position: absolute;
     top: 54px;
     left: 16px;
     right: 16px;
     width: auto;
-    border: 1px solid #333333;
-    padding: 8px 0;
+    border: 1px solid var(--color-border-strong);
+    padding: var(--space-3) 0;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.8);
     z-index: 100;
     box-sizing: border-box;
@@ -110,9 +180,9 @@ body {
 }
 
 .menu-detail-body {
-    font-size: 0.82rem;
+    font-size: var(--font-size-body);
     line-height: 1.6;
-    color: #cccccc;
+    color: var(--color-text-body);
     max-height: 46vh;
     overflow-y: auto;
     margin-bottom: 12px;
@@ -129,20 +199,20 @@ body {
 
 .menu-detail-nav {
     display: flex;
-    gap: 8px;
+    gap: var(--space-3);
     padding-top: 10px;
-    border-top: 1px solid #333333;
+    border-top: 1px solid var(--color-border-strong);
 }
 
 .menu-nav-btn {
     flex: 1;
     text-align: center;
-    padding: 10px;
-    border-radius: 6px;
-    border: 1px solid #333333;
-    background: #262626;
-    color: #d4af37;
-    font-size: 0.72rem;
+    padding: var(--space-4);
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--color-border-strong);
+    background: var(--color-surface-hover);
+    color: var(--color-accent);
+    font-size: var(--font-size-sm);
     font-weight: 700;
     letter-spacing: 1px;
     text-transform: uppercase;
@@ -152,14 +222,14 @@ body {
 }
 
 .menu-nav-btn:hover {
-    background: #2e2e2e;
+    background: var(--color-border-subtle);
 }
 
 .menu-section-label {
-    font-size: 0.68rem;
+    font-size: var(--font-size-xs);
     letter-spacing: 1.1px;
     text-transform: uppercase;
-    color: #d4af37;
+    color: var(--color-accent);
     font-weight: 700;
     margin: 14px 0 6px 0 !important;
 }
@@ -170,23 +240,23 @@ body {
 
 .menu-pill-row {
     display: flex;
-    gap: 6px;
+    gap: var(--space-2);
     flex-wrap: wrap;
 }
 
 .menu-pill {
-    font-size: 0.72rem;
+    font-size: var(--font-size-sm);
     padding: 6px 10px;
-    border-radius: 8px;
-    border: 1px solid #333333;
-    background: #1a1a1a;
-    color: #999999;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border-strong);
+    background: var(--color-surface);
+    color: var(--color-text-muted);
     cursor: pointer;
 }
 
 .menu-pill.active {
-    color: #d4af37;
-    border-color: #d4af37;
+    color: var(--color-accent);
+    border-color: var(--color-accent);
 }
 
 .menu-pill:disabled {
@@ -194,14 +264,14 @@ body {
 }
 
 .menu-hint {
-    font-size: 0.68rem;
-    color: #777777;
+    font-size: var(--font-size-xs);
+    color: var(--color-text-faint);
     margin: 6px 0 0 0 !important;
 }
 
 .menu-privacy-text {
-    font-size: 0.78rem;
-    color: #aaaaaa;
+    font-size: var(--font-size-md);
+    color: var(--color-text-light);
     line-height: 1.5;
 }
 
@@ -215,8 +285,8 @@ body {
 }
 
 .menu-version-text {
-    font-size: 0.78rem;
-    color: #999999;
+    font-size: var(--font-size-md);
+    color: var(--color-text-muted);
 }
 
 .menu-feedback-btn {
@@ -226,54 +296,54 @@ body {
 
 /* Karty w My Moments */
 .saved-empty {
-    font-size: 0.82rem;
-    color: #888888;
+    font-size: var(--font-size-body);
+    color: var(--color-text-soft);
     text-align: center;
     padding: 20px 0;
 }
 
 .saved-item {
-    border: 1px solid #333333;
-    border-radius: 8px;
-    padding: 10px 12px;
-    margin-bottom: 8px;
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-md);
+    padding: var(--space-4) 12px;
+    margin-bottom: var(--space-3);
 }
 
 .saved-item-artist {
-    color: #d4af37;
+    color: var(--color-accent);
     font-weight: 700;
-    font-size: 0.78rem;
+    font-size: var(--font-size-md);
     margin: 0 0 2px 0 !important;
 }
 
 .saved-item-title {
-    color: #f0f0f0;
-    font-size: 0.85rem;
+    color: var(--color-text-bright);
+    font-size: var(--font-size-lg);
     margin: 0 0 2px 0 !important;
 }
 
 .saved-item-meta {
-    color: #888888;
+    color: var(--color-text-soft);
     font-size: 0.7rem;
     margin: 0 0 8px 0 !important;
 }
 
 .saved-item-actions {
     display: flex;
-    gap: 8px;
+    gap: var(--space-3);
 }
 
 .saved-item-actions button {
     flex: 1;
-    font-size: 0.68rem;
+    font-size: var(--font-size-xs);
     font-weight: 700;
     letter-spacing: 0.5px;
     text-transform: uppercase;
     padding: 7px;
-    border-radius: 6px;
-    border: 1px solid #333333;
-    background: #1a1a1a;
-    color: #cccccc;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--color-border-strong);
+    background: var(--color-surface);
+    color: var(--color-text-body);
     cursor: pointer;
 }
 
@@ -282,68 +352,68 @@ body {
     display: block;
     width: 100%;
     box-sizing: border-box;
-    padding: 12px 16px;
-    color: #cccccc;
+    padding: var(--space-5) 16px;
+    color: var(--color-text-body);
     text-decoration: none;
-    font-size: 0.85rem;
+    font-size: var(--font-size-lg);
     font-weight: 500;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     background: transparent;
     border: none;
     text-align: left;
-    font-family: 'Inter', sans-serif;
+    font-family: var(--font-family-base);
     cursor: pointer;
     transition: background 0.15s ease, color 0.15s ease;
 }
 
 .menu-item:hover {
     background: rgba(212, 175, 55, 0.1);
-    color: #d4af37;
+    color: var(--color-accent);
 }
 
 #anchor-badge {
-    font-size: 0.72rem;
+    font-size: var(--font-size-sm);
     letter-spacing: 1.1px;
-    color: #d4af37;
+    color: var(--color-accent);
     text-transform: uppercase;
     font-weight: 700;
 }
 
 #composer-name {
-    font-size: 2.0rem;
+    font-size: var(--font-size-name);
     margin: 2px 0 0 0;
-    color: #ffffff;
+    color: var(--color-text-strong);
     font-weight: 700;
 }
 
 #composer-meta {
-    font-size: 0.95rem;
-    color: #999999;
+    font-size: var(--font-size-copy);
+    color: var(--color-text-muted);
     margin: 2px 0 0 0;
 }
 
 /* Zakładki górne: DAY CARD / MOVIE (stub, przygotowane pod przyszłość) */
 .top-tabs {
     display: flex;
-    gap: 6px;
+    gap: var(--space-2);
     margin-bottom: 4px;
 }
 
 .top-tab {
-    font-size: 0.68rem;
+    font-size: var(--font-size-xs);
     font-weight: 700;
     letter-spacing: 1.1px;
     padding: 5px 10px;
     border-radius: 7px;
     text-transform: uppercase;
-    color: #666666;
-    border: 1px solid #2a2a2a;
+    color: var(--color-text-disabled);
+    border: 1px solid var(--color-border);
 }
 
 .top-tab.active {
-    color: #d4af37;
-    border-color: #d4af37;
+    color: var(--color-accent);
+    border-color: var(--color-accent);
     background: rgba(212, 175, 55, 0.08);
 }
 
@@ -354,22 +424,22 @@ body {
 
 /* PANEL 2: About the Artist / About this Day / The Story */
 .about-panel {
-    background: #1a1a1a;
-    border-radius: 12px;
-    border: 1px solid #2a2a2a;
+    background: var(--color-surface);
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--color-border);
     padding: 8px 16px 8px;
-    margin-bottom: 8px;
+    margin-bottom: var(--space-3);
 }
 
 .artist-bio {
-    font-size: 0.95rem;
-    color: #bbbbbb;
+    font-size: var(--font-size-copy);
+    color: var(--color-text-body);
     line-height: 1.5;
     margin: 0;
 }
 
 .about-label {
-    color: #d4af37;
+    color: var(--color-accent);
     font-weight: 700;
     letter-spacing: 0.6px;
     margin-right: 4px;
@@ -390,11 +460,11 @@ body {
     width: 100%;
     background: transparent;
     border: none;
-    border-top: 1px solid #2a2a2a;
-    color: #d4af37;
-    font-family: 'Inter', sans-serif;
-    padding: 8px 0 0 0;
-    margin-top: 8px;
+    border-top: 1px solid var(--color-border);
+    color: var(--color-accent);
+    font-family: var(--font-family-base);
+    padding: var(--space-3) 0 0 0;
+    margin-top: var(--space-3);
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -405,15 +475,15 @@ body {
 .toggle-group {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    font-size: 0.72rem;
+    gap: var(--space-3);
+    font-size: var(--font-size-sm);
     font-weight: 700;
     letter-spacing: 1.1px;
     text-transform: uppercase;
 }
 
 .bio-toggle-arrow {
-    font-size: 0.85rem;
+    font-size: var(--font-size-lg);
     line-height: 1;
     transition: transform 0.3s ease;
 }
@@ -423,9 +493,9 @@ body {
 }
 
 .my-moment-eyebrow {
-    font-size: 0.72rem;
+    font-size: var(--font-size-sm);
     letter-spacing: 1.1px;
-    color: #d4af37;
+    color: var(--color-accent);
     text-transform: uppercase;
     font-weight: 700;
     margin: 0 0 6px 0;
@@ -453,22 +523,22 @@ body {
 
 
 #event-note {
-    font-size: 0.95rem;
-    color: #d4af37;
+    font-size: var(--font-size-copy);
+    color: var(--color-accent);
     background: rgba(212, 175, 55, 0.1);
     padding: 8px 12px;
-    border-radius: 8px;
+    border-radius: var(--radius-md);
     margin-top: 12px;
     margin-bottom: 0;
 }
 
 .main-track-card {
     position: relative;
-    background: #1a1a1a;
-    border-radius: 12px;
+    background: var(--color-surface);
+    border-radius: var(--radius-xl);
     padding: 14px 16px;
-    margin-bottom: 8px;
-    border: 1px solid #d4af37;
+    margin-bottom: var(--space-3);
+    border: 1px solid var(--color-accent);
     box-shadow: 0 4px 12px rgba(212, 175, 55, 0.08);
 }
 
@@ -485,8 +555,8 @@ body {
 }
 
 .main-track-title {
-    font-size: 1.15rem;
-    color: #ffffff;
+    font-size: var(--font-size-display);
+    color: var(--color-text-strong);
     font-weight: 600;
     margin: 0;
     line-height: 1.35;
@@ -494,19 +564,11 @@ body {
     min-height: 1.35em;
 }
 
-.track-right-column {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 5px;
-    flex-shrink: 0;
-}
-
 /* Discover More żyje teraz wewnątrz main-track-card, więc nie potrzebuje
    własnego tła/ramki/notcha — tylko cienkiego separatora od reszty karty. */
 .discover-more-section {
     margin: 10px -16px -14px -16px;
-    border-top: 1px solid #2a2a2a;
+    border-top: 1px solid var(--color-border);
     overflow: hidden;
     position: relative;
 }
@@ -516,16 +578,16 @@ body {
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    gap: 8px;
+    gap: var(--space-3);
     width: 100%;
     box-sizing: border-box;
-    padding: 12px 16px;
+    padding: var(--space-5) 16px;
     margin-bottom: 16px;
     background: transparent;
-    border: 1px solid #2a2a2a;
-    border-radius: 10px;
-    color: #d4af37;
-    font-size: 0.72rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    color: var(--color-accent);
+    font-size: var(--font-size-sm);
     font-weight: 700;
     letter-spacing: 1.1px;
     text-decoration: none;
@@ -535,7 +597,7 @@ body {
 
 .go-deeper-bar:hover {
     background: rgba(212, 175, 55, 0.06);
-    border-color: #d4af37;
+    border-color: var(--color-accent);
 }
 
 .go-deeper-bar:hover .external-link-icon {
@@ -548,9 +610,9 @@ body {
     min-height: 56px;
     background: transparent;
     border: none;
-    color: #d4af37;
-    padding: 12px 16px;
-    font-family: 'Inter', sans-serif;
+    color: var(--color-accent);
+    padding: var(--space-5) 16px;
+    font-family: var(--font-family-base);
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -566,15 +628,15 @@ body {
 
 #discover-arrow {
     display: inline-block;
-    font-size: 0.85rem;
+    font-size: var(--font-size-lg);
     line-height: 1;
-    color: #d4af37;
+    color: var(--color-accent);
     transition: transform 0.3s ease;
 }
 
 /* Styl eleganckiej ikony zewnętrznego linku. */
 .external-link-icon {
-    stroke: #d4af37;
+    stroke: var(--color-accent);
     flex-shrink: 0;
     transition: transform 0.2s ease;
 }
@@ -600,18 +662,18 @@ body {
 }
 
 .track-card {
-    background: #222222;
-    border-radius: 8px;
+    background: var(--color-surface-raised);
+    border-radius: var(--radius-md);
     padding: 8px 12px;
     margin-bottom: 6px;
-    border: 1px solid #2e2e2e;
+    border: 1px solid var(--color-border-subtle);
     cursor: pointer;
     transition: all 0.2s ease;
 }
 
 .track-card:hover {
-    border-color: #d4af37;
-    background: #262626;
+    border-color: var(--color-accent);
+    background: var(--color-surface-hover);
 }
 
 .track-card:last-child {
@@ -621,7 +683,7 @@ body {
 .track-header {
     display: flex;
     align-items: flex-start;
-    gap: 12px;
+    gap: var(--space-5);
     width: 100%;
 }
 .track-main-info {
@@ -631,20 +693,20 @@ body {
 .track-title-row {
     display: flex;
     align-items: flex-start;
-    gap: 8px;
+    gap: var(--space-3);
     min-width: 0;
 }
 .track-rank {
-    color: #d4af37;
+    color: var(--color-accent);
     font-weight: 700;
-    font-size: 0.95rem;
+    font-size: var(--font-size-copy);
     flex: 0 0 auto;
     line-height: 1.35;
 }
 .track-title {
-    font-size: 1.02rem;
+    font-size: var(--font-size-title);
     margin: 0;
-    color: #ffffff;
+    color: var(--color-text-strong);
     font-weight: 600;
     line-height: 1.35;
     white-space: normal;
@@ -657,7 +719,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    gap: 6px;
+    gap: var(--space-2);
     flex: 0 0 auto;
     min-width: 62px;
 }
@@ -666,8 +728,8 @@ body {
     align-items: center;
     justify-content: flex-end;
     gap: 4px;
-    font-size: 0.85rem;
-    color: #888888;
+    font-size: var(--font-size-lg);
+    color: var(--color-text-soft);
     font-weight: 500;
     white-space: nowrap;
     text-align: right;
@@ -676,7 +738,7 @@ body {
 .duration-clock {
     font-size: 0.88rem;
     line-height: 1;
-    color: #888888;
+    color: var(--color-text-soft);
     display: inline-block;
 }
 .track-mood-row {
@@ -688,71 +750,66 @@ body {
 }
 .mood-tag {
     font-size: 0.75rem;
-    background: #2b2b2b;
-    color: #b0b0b0;
+    background: var(--color-surface-tag);
+    color: var(--color-text-mid);
     padding: 2px 4px;
-    border-radius: 12px;
+    border-radius: var(--radius-xl);
     white-space: nowrap;
     transform: translateX(8px);
 }
 
 .track-fact {
-    font-size: 0.95rem;
-    color: #bbbbbb;
+    font-size: var(--font-size-copy);
+    color: var(--color-text-body);
     line-height: 1.4;
     margin: 8px 0 14px 0;
 }
 
 /* „Insight:” ma dokładnie ten sam kolor i styl etykiety co „Bio:”. */
 .track-fact strong {
-    color: #d4af37;
+    color: var(--color-accent);
     font-weight: 700;
 }
 
 .track-actions {
     display: flex;
     flex-direction: column;
-    gap: 8px;
-}
-
-.action-row {
-    display: flex;
-    gap: 8px;
+    gap: var(--space-3);
 }
 
 .btn-custom {
     font-size: 0.8rem;
     padding: 9px 12px;
-    border-radius: 6px;
+    border-radius: var(--radius-sm);
     text-decoration: none;
-    color: #cccccc;
+    color: var(--color-text-body);
     font-weight: 600;
     text-align: center;
     flex: 1;
     min-width: 0;
-    border: 1px solid #333333;
-    background-color: #262626;
+    border: 1px solid var(--color-border-strong);
+    background-color: var(--color-surface-hover);
     cursor: pointer;
     box-sizing: border-box;
     transition: all 0.2s ease;
 }
 
 .btn-custom:hover {
-    background-color: #303030;
-    color: #ffffff;
-    border-color: #d4af37;
+    background-color: var(--color-surface-hover-strong);
+    color: var(--color-text-strong);
+    border-color: var(--color-accent);
 }
 
 .btn-custom.btn-2.is-playing {
-    color: #d4af37;
-    border-color: #d4af37;
+    color: var(--color-accent);
+    border-color: var(--color-accent);
     background-color: rgba(212, 175, 55, 0.08);
 }
 
 /* PLAY ME follows the same visual language as the Insight label:
    bold, gold, without changing the existing button layout. */
 .btn-custom.btn-2:not(.is-split) {
-    color: #d4af37;
+    color: var(--color-accent);
     font-weight: 700;
 }
 
@@ -792,7 +849,7 @@ body {
 }
 
 .btn-custom.btn-2.is-split .play-primary {
-    border-right: 1px solid #444;
+    border-right: 1px solid var(--color-border-active);
 }
 
 /* Mindfulness mode: any YouTube player is kept out of the visual UI.
@@ -812,21 +869,7 @@ iframe[src*="youtube.com/embed/"] {
     overflow: hidden !important;
 }
 
-/* CLASSICS IN 7 uses the full browser viewport. */
-html, body {
-    width: 100%;
-    min-width: 100%;
-}
-
-body {
-    padding: 5px 5px env(safe-area-inset-bottom, 20px) 5px;
-}
-
-.app-container {
-    width: 100%;
-    max-width: none;
-    min-height: 100vh;
-}
+/* Full browser viewport / PWA safe-area handling is defined in the base rules above. */
 
 /* YouTube remains an official playback engine, but never becomes part of the mindfulness UI. */
 #youtube-player-hidden {
