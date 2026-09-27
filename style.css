@@ -1,6 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 /* ========================================
+   1. TOKENS
+======================================== */
+
+/* ========================================
    TOKENS — CSS-01
    Values mirror the existing visual system.
    Change tokens first; components should not
@@ -69,6 +73,11 @@
     --line-height-relaxed: 1.6;
 }
 
+
+/* ========================================
+   2. BASE
+======================================== */
+
 html {
     min-height: 100%;
 }
@@ -91,6 +100,11 @@ body {
 }
 
 /* Ramka dla górnej sekcji kompozytora */
+
+/* ========================================
+   3. HEADER / TOP NAVIGATION
+======================================== */
+
 .composer-header-card {
     background: var(--color-surface);
     border-radius: var(--radius-xl);
@@ -138,6 +152,11 @@ body {
 }
 
 /* Styl rozwijanego menu pod zębatką */
+
+/* ========================================
+   4. SETTINGS / MENU
+======================================== */
+
 .settings-menu {
     display: none;
     flex-direction: column;
@@ -372,6 +391,11 @@ body {
     color: var(--color-accent);
 }
 
+
+/* ========================================
+   5. TOP TABS + IDENTITY
+======================================== */
+
 #anchor-badge {
     font-size: var(--font-size-sm);
     letter-spacing: 1.1px;
@@ -423,6 +447,11 @@ body {
 }
 
 /* PANEL 2: About the Artist / About this Day / The Story */
+
+/* ========================================
+   6. ABOUT / BIO
+======================================== */
+
 .about-panel {
     background: var(--color-surface);
     border-radius: var(--radius-xl);
@@ -492,6 +521,11 @@ body {
     transform: rotate(180deg);
 }
 
+
+/* ========================================
+   7. MY MOMENT / EVENT
+======================================== */
+
 .my-moment-eyebrow {
     font-size: var(--font-size-sm);
     letter-spacing: 1.1px;
@@ -531,6 +565,11 @@ body {
     margin-top: 12px;
     margin-bottom: 0;
 }
+
+
+/* ========================================
+   8. MAIN TRACK CARD
+======================================== */
 
 .main-track-card {
     position: relative;
@@ -656,6 +695,11 @@ body {
     padding: 0 16px;
 }
 
+
+/* ========================================
+   9. WORKS / TRACK LIST
+======================================== */
+
 .discover-content.expanded {
     max-height: 1200px;
     padding: 0 16px 16px 16px;
@@ -771,6 +815,11 @@ body {
     font-weight: 700;
 }
 
+
+/* ========================================
+   10. ACTIONS / PLAYBACK CONTROLS
+======================================== */
+
 .track-actions {
     display: flex;
     flex-direction: column;
@@ -856,6 +905,11 @@ body {
 
 /* Mindfulness mode: any YouTube player is kept out of the visual UI.
    It can remain available as a playback engine without becoming a distraction. */
+
+/* ========================================
+   11. PLAYBACK ENGINE / HIDDEN YOUTUBE
+======================================== */
+
 .youtube-player,
 #youtube-player,
 #youtube-container,
@@ -884,3 +938,4 @@ iframe[src*="youtube.com/embed/"] {
     pointer-events: none !important;
     overflow: hidden !important;
 }
+
