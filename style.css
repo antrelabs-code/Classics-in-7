@@ -1039,3 +1039,19 @@ iframe[src*="youtube.com/embed/"] {
 .settings-btn.active .gear-icon {
     transform: rotate(45deg);
 }
+
+/* ========================================
+   CSS-11 — Feedback readability
+======================================== */
+
+/* Supporting feedback copy should be readable at the same level as the
+   feedback action, without changing the main card typography. */
+#panel-version-feedback .menu-hint {
+    font-size: var(--menu-font-body);
+    line-height: 1.5;
+    color: var(--color-text-body);
+}
+
+#panel-version-feedback .menu-feedback-btn {
+    font-size: var(--menu-font-body);
+}
