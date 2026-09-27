@@ -73,10 +73,10 @@
 
     /* Menu typography: kept independent so future skins can scale the menu
        without changing the main card typography. */
-    --menu-font-xs: 0.80rem;
-    --menu-font-sm: 0.90rem;
-    --menu-font-body: 0.95rem;
-    --menu-font-item: 1.08rem;
+    --menu-font-xs: 0.72rem;
+    --menu-font-sm: 0.80rem;
+    --menu-font-body: 0.90rem;
+    --menu-font-item: 0.96rem;
 
     --line-height-tight: 1.35;
     --line-height-normal: 1.5;
@@ -154,11 +154,22 @@ body {
     filter: brightness(1.2);
 }
 
+.settings-btn {
+    transform: none;
+}
+
+.gear-icon {
+    transition: transform 0.28s ease, filter 0.2s ease;
+}
+
+.settings-btn.active .gear-icon {
+    transform: rotate(45deg);
+}
+
 .settings-btn:hover,
 .settings-btn.active {
     background: rgba(212, 175, 55, 0.08);
     border: 1px solid var(--color-accent);
-    transform: rotate(45deg);
 }
 
 /* Styl rozwijanego menu pod zębatką */
@@ -179,6 +190,8 @@ body {
     width: auto;
     border: 1px solid var(--color-border-strong);
     padding: var(--space-3) 0;
+    max-height: calc(100dvh - 90px);
+    overflow-y: auto;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.8);
     z-index: 100;
     box-sizing: border-box;
@@ -192,7 +205,6 @@ body {
     display: flex;
     flex-direction: column;
 }
-
 
 .settings-menu.detail-open .menu-list-view {
     display: none;
@@ -256,7 +268,7 @@ body {
 }
 
 .menu-section-label {
-    font-size: var(--menu-font-sm);
+    font-size: var(--menu-font-xs);
     letter-spacing: 1.1px;
     text-transform: uppercase;
     color: var(--color-accent);
@@ -294,7 +306,7 @@ body {
 }
 
 .menu-hint {
-    font-size: var(--menu-font-sm);
+    font-size: var(--menu-font-xs);
     color: var(--color-text-faint);
     margin: 6px 0 0 0 !important;
 }
@@ -342,13 +354,13 @@ body {
 .saved-item-artist {
     color: var(--color-accent);
     font-weight: 700;
-    font-size: var(--font-size-md);
+    font-size: var(--font-size-body);
     margin: 0 0 2px 0 !important;
 }
 
 .saved-item-title {
     color: var(--color-text-bright);
-    font-size: var(--font-size-lg);
+    font-size: var(--font-size-copy);
     margin: 0 0 2px 0 !important;
 }
 
@@ -382,13 +394,13 @@ body {
     display: block;
     width: 100%;
     box-sizing: border-box;
-    padding: 14px 16px;
-    min-height: 48px;
+    padding: 10px 16px;
+    min-height: 44px;
     color: var(--color-text-body);
     text-decoration: none;
     font-size: var(--menu-font-item);
     font-weight: 500;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.05em;
     text-transform: uppercase;
     background: transparent;
     border: none;
@@ -539,7 +551,7 @@ body {
 ======================================== */
 
 .my-moment-eyebrow {
-    font-size: var(--font-size-copy);
+    font-size: var(--font-size-sm);
     letter-spacing: 1.1px;
     color: var(--color-accent);
     text-transform: uppercase;
@@ -734,7 +746,7 @@ body {
     margin-bottom: 6px;
     border: 1px solid var(--color-border-subtle);
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 
 .track-card:hover {
@@ -850,7 +862,7 @@ body {
 
 .btn-custom {
     font-size: 0.8rem;
-    padding: 9px 12px;
+    padding: 0;
     border-radius: var(--radius-sm);
     text-decoration: none;
     color: var(--color-text-body);
@@ -862,7 +874,7 @@ body {
     background-color: var(--color-surface-hover);
     cursor: pointer;
     box-sizing: border-box;
-    transition: all 0.2s ease;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 
 .btn-custom:hover {
@@ -899,15 +911,13 @@ body {
 }
 
 .btn-custom.btn-2 {
-    flex: 1 1 0;
-    min-width: 0;
+    flex: 1 1 auto;
 }
 
 /* PLAY ME pozostaje jednym wspólnym przyciskiem. W trybie playback
    dzieli się tylko cienką kreską na PAUSE/RESUME i STOP. */
 .btn-custom.btn-2.is-split {
     display: grid;
-    flex: 1 1 0;
     grid-template-columns: 1fr 1fr;
     padding: 0;
     overflow: hidden;
@@ -925,6 +935,25 @@ body {
 
 .btn-custom.btn-2.is-split .play-primary {
     border-right: 1px solid var(--color-border-active);
+}
+
+
+.btn-custom.btn-2:not(.is-split) .play-primary {
+    min-height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 9px 12px;
+    box-sizing: border-box;
+}
+
+#panel-settings-panel .menu-detail-body {
+    max-height: none;
+    overflow: visible;
+}
+
+#panel-settings-panel {
+    padding-bottom: 4px;
 }
 
 /* Mindfulness mode: any YouTube player is kept out of the visual UI.
