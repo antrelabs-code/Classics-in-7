@@ -73,9 +73,9 @@
 
     /* Menu typography: kept independent so future skins can scale the menu
        without changing the main card typography. */
-    --menu-font-xs: 0.72rem;
-    --menu-font-sm: 0.80rem;
-    --menu-font-body: 0.90rem;
+    --menu-font-xs: 0.80rem;
+    --menu-font-sm: 0.90rem;
+    --menu-font-body: 0.95rem;
     --menu-font-item: 1.08rem;
 
     --line-height-tight: 1.35;
@@ -193,6 +193,7 @@ body {
     flex-direction: column;
 }
 
+
 .settings-menu.detail-open .menu-list-view {
     display: none;
 }
@@ -255,7 +256,7 @@ body {
 }
 
 .menu-section-label {
-    font-size: var(--menu-font-xs);
+    font-size: var(--menu-font-sm);
     letter-spacing: 1.1px;
     text-transform: uppercase;
     color: var(--color-accent);
@@ -293,7 +294,7 @@ body {
 }
 
 .menu-hint {
-    font-size: var(--menu-font-xs);
+    font-size: var(--menu-font-sm);
     color: var(--color-text-faint);
     margin: 6px 0 0 0 !important;
 }
@@ -538,7 +539,7 @@ body {
 ======================================== */
 
 .my-moment-eyebrow {
-    font-size: var(--font-size-sm);
+    font-size: var(--font-size-copy);
     letter-spacing: 1.1px;
     color: var(--color-accent);
     text-transform: uppercase;
@@ -898,13 +899,15 @@ body {
 }
 
 .btn-custom.btn-2 {
-    flex: 1 1 auto;
+    flex: 1 1 0;
+    min-width: 0;
 }
 
 /* PLAY ME pozostaje jednym wspólnym przyciskiem. W trybie playback
    dzieli się tylko cienką kreską na PAUSE/RESUME i STOP. */
 .btn-custom.btn-2.is-split {
     display: grid;
+    flex: 1 1 0;
     grid-template-columns: 1fr 1fr;
     padding: 0;
     overflow: hidden;
