@@ -597,7 +597,7 @@ body {
 
 .main-track-card {
     position: relative;
-    background: var(--color-surface);
+    background: rgba(212, 175, 55, 0.08);
     border-radius: var(--radius-xl);
     padding: 14px 16px;
     margin-bottom: var(--space-3);
