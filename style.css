@@ -332,6 +332,20 @@ body {
     border-color: var(--color-accent);
 }
 
+/* Aktualny motyw: tylko informacja, bez reakcji na dotyk */
+.menu-pill:disabled {
+    cursor: default;
+}
+
+.menu-pill:disabled:active {
+    border-color: var(--color-border-strong);
+}
+
+.menu-pill.active:disabled,
+.menu-pill.active:disabled:active {
+    border-color: var(--color-accent);
+}
+
 .menu-hint {
     font-size: var(--menu-font-xs);
     color: var(--color-text-faint);
