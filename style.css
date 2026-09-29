@@ -149,9 +149,14 @@ body {
     transition: filter 0.2s ease;
 }
 
-.settings-btn:hover .gear-icon,
 .settings-btn.active .gear-icon {
     filter: brightness(1.2);
+}
+
+@media (hover: hover) {
+    .settings-btn:hover .gear-icon {
+        filter: brightness(1.2);
+    }
 }
 
 .settings-btn {
@@ -166,10 +171,24 @@ body {
     transform: rotate(45deg);
 }
 
-.settings-btn:hover,
 .settings-btn.active {
     background: rgba(212, 175, 55, 0.08);
     border: 1px solid var(--color-accent);
+}
+
+@media (hover: hover) {
+    .settings-btn:hover {
+        background: rgba(212, 175, 55, 0.08);
+        border: 1px solid var(--color-accent);
+    }
+}
+
+.settings-btn,
+.menu-item,
+.menu-nav-btn,
+.menu-pill,
+.saved-item-actions button {
+    -webkit-tap-highlight-color: transparent;
 }
 
 /* Styl rozwijanego menu pod zębatką */
@@ -185,12 +204,12 @@ body {
     border-radius: var(--radius-md);
     position: absolute;
     top: 54px;
-    left: 16px;
-    right: 16px;
+    left: 9px;   /* karta 350 px - 2 px ramki - 2 x 9 px = menu 330 px */
+    right: 9px;
     width: auto;
     border: 1px solid var(--color-border-strong);
-    padding: var(--space-3) 0;
-    max-height: calc(100dvh - 90px);
+    padding: 4px 0;
+    max-height: calc(100dvh - 110px);
     overflow-y: auto;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.8);
     z-index: 100;
@@ -213,8 +232,9 @@ body {
 .menu-detail-panel {
     display: none;
     flex-direction: column;
-    padding: 4px 16px 12px;
+    padding: 4px 12px 10px;
     box-sizing: border-box;
+    min-height: 0;
 }
 
 .menu-detail-panel.active {
@@ -223,16 +243,19 @@ body {
 
 .menu-detail-body {
     font-size: var(--menu-font-body);
-    line-height: 1.6;
+    line-height: 1.5;
     color: var(--color-text-body);
-    max-height: 46vh;
+    /* Wysokość wg treści; gdy nie mieści się w oknie, przewija się samo body,
+       a Back / Main zostają widoczne na dole. */
+    flex: 1 1 auto;
+    min-height: 0;
     overflow-y: auto;
-    margin-bottom: 12px;
-    padding-right: 4px;
+    margin-bottom: 8px;
+    padding-right: 2px;
 }
 
 .menu-detail-body p {
-    margin: 0 0 10px 0;
+    margin: 0 0 8px 0;
 }
 
 .menu-detail-body p:last-child {
@@ -242,7 +265,8 @@ body {
 .menu-detail-nav {
     display: flex;
     gap: var(--space-3);
-    padding-top: 10px;
+    padding-top: 8px;
+    flex-shrink: 0;
     border-top: 1px solid var(--color-border-strong);
 }
 
@@ -263,8 +287,15 @@ body {
     box-sizing: border-box;
 }
 
-.menu-nav-btn:hover {
+@media (hover: hover) {
+    .menu-nav-btn:hover {
+        background: var(--color-border-subtle);
+    }
+}
+
+.menu-nav-btn:active {
     background: var(--color-border-subtle);
+    border-color: var(--color-accent);
 }
 
 .menu-section-label {
@@ -273,7 +304,7 @@ body {
     text-transform: uppercase;
     color: var(--color-accent);
     font-weight: 700;
-    margin: 14px 0 6px 0 !important;
+    margin: 10px 0 6px 0 !important;
 }
 
 .menu-section-label:first-child {
@@ -301,10 +332,6 @@ body {
     border-color: var(--color-accent);
 }
 
-.menu-pill:disabled {
-    cursor: default;
-}
-
 .menu-hint {
     font-size: var(--menu-font-xs);
     color: var(--color-text-faint);
@@ -322,8 +349,15 @@ body {
     margin-top: 4px;
 }
 
-.menu-clear-btn:hover {
-    background: rgba(224, 57, 44, 0.08);
+@media (hover: hover) {
+    .menu-clear-btn:hover {
+        background: rgba(224, 57, 44, 0.08);
+    }
+}
+
+.menu-clear-btn:active {
+    background: rgba(224, 57, 44, 0.15);
+    border-color: var(--color-danger);
 }
 
 .menu-version-text {
@@ -341,14 +375,14 @@ body {
     font-size: var(--font-size-body);
     color: var(--color-text-soft);
     text-align: center;
-    padding: 20px 0;
+    padding: 12px 0;
 }
 
 .saved-item {
     border: 1px solid var(--color-border-strong);
     border-radius: var(--radius-md);
-    padding: var(--space-4) 12px;
-    margin-bottom: var(--space-3);
+    padding: 8px 10px;
+    margin-bottom: 6px;
 }
 
 .saved-item-artist {
@@ -387,6 +421,22 @@ body {
     background: var(--color-surface);
     color: var(--color-text-body);
     cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.saved-item-actions button:active {
+    transform: scale(0.97);
+    border-color: var(--color-accent);
+}
+
+.saved-item-actions button.is-flash {
+    color: var(--color-accent);
+    border-color: var(--color-accent);
+    background-color: rgba(212, 175, 55, 0.15);
+}
+
+.menu-pill:active {
+    border-color: var(--color-accent);
 }
 
 /* Styl pozycji menu (baza pod zmianę wielkości czcionki) */
@@ -394,7 +444,7 @@ body {
     display: block;
     width: 100%;
     box-sizing: border-box;
-    padding: 10px 16px;
+    padding: 10px 12px;
     min-height: 44px;
     color: var(--color-text-body);
     text-decoration: none;
@@ -410,8 +460,15 @@ body {
     transition: background 0.15s ease, color 0.15s ease;
 }
 
-.menu-item:hover {
-    background: rgba(212, 175, 55, 0.1);
+@media (hover: hover) {
+    .menu-item:hover {
+        background: rgba(212, 175, 55, 0.1);
+        color: var(--color-accent);
+    }
+}
+
+.menu-item:active {
+    background: rgba(212, 175, 55, 0.15);
     color: var(--color-accent);
 }
 
@@ -881,6 +938,19 @@ body {
     -webkit-tap-highlight-color: transparent;
 }
 
+/* Reakcja na dotyk: chwilowe wciśnięcie w trakcie naciskania... */
+.btn-custom:active {
+    transform: scale(0.97);
+    border-color: var(--color-accent);
+}
+
+/* ...oraz krótkie złote podświetlenie po kliknięciu (Save / Share), ustawiane z JS. */
+.btn-custom.is-flash {
+    color: var(--color-accent);
+    border-color: var(--color-accent);
+    background-color: rgba(212, 175, 55, 0.15);
+}
+
 .btn-custom.btn-2.is-playing {
     color: var(--color-accent);
     border-color: var(--color-accent);
@@ -943,11 +1013,6 @@ body {
     justify-content: center;
     padding: 9px 12px;
     box-sizing: border-box;
-}
-
-#panel-settings-panel .menu-detail-body {
-    max-height: none;
-    overflow: visible;
 }
 
 #panel-settings-panel {
@@ -1020,12 +1085,8 @@ iframe[src*="youtube.com/embed/"] {
 /* Settings gets the full available vertical space; the panel itself scrolls
    instead of being visually clipped near the bottom of the viewport. */
 .settings-menu.detail-open {
-    max-height: calc(100dvh - 62px);
-}
-
-#panel-settings-panel .menu-detail-body {
-    max-height: calc(100dvh - 150px);
-    overflow-y: auto;
+    max-height: calc(100dvh - 110px);
+    overflow: hidden;
 }
 
 /* Gear always returns to its neutral position when the menu closes. */

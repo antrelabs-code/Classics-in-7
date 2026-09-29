@@ -131,12 +131,32 @@ document.addEventListener("DOMContentLoaded", async () => {
             window.currentTrackSearchQuery = searchQuery;
         }
 
+        // Krótkie potwierdzenie na przycisku: złote podświetlenie + opcjonalna zmiana napisu.
+        function flashButton(btn, label = null, duration = 1200) {
+            if (!btn) return;
+            if (btn._flashTimer) {
+                clearTimeout(btn._flashTimer);
+            } else {
+                btn._originalLabel = btn.textContent;
+            }
+            if (label) btn.textContent = label;
+            btn.classList.add("is-flash");
+            btn._flashTimer = setTimeout(() => {
+                btn.classList.remove("is-flash");
+                btn.textContent = btn._originalLabel;
+                btn._flashTimer = null;
+            }, duration);
+        }
+
         document.getElementById("btn-1").addEventListener("click", () => {
             const track = getSelectedTrack();
             if (!track) return;
             const list = loadSavedMoments();
             const key = getMomentKey(composerName, track);
-            if (list.some(m => m.key === key)) return; // już zapisane, bez duplikatu
+            if (list.some(m => m.key === key)) { // już zapisane, bez duplikatu
+                flashButton(document.getElementById("btn-1"), "Saved");
+                return;
+            }
             list.unshift({
                 key,
                 artist: composerName,
@@ -146,10 +166,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             });
             saveSavedMoments(list);
 
-            const saveBtn = document.getElementById("btn-1");
-            const original = saveBtn.textContent;
-            saveBtn.textContent = "Saved";
-            setTimeout(() => { saveBtn.textContent = original; }, 1200);
+            flashButton(document.getElementById("btn-1"), "Saved");
         });
 
         // PLAY ME — YouTube is the playback engine, but its visual player stays hidden.
@@ -343,7 +360,9 @@ document.addEventListener("DOMContentLoaded", async () => {
         document.getElementById("btn-3").addEventListener("click", async () => {
             const track = getSelectedTrack();
             const shareText = `${track?.title || ""} — ${composerName}`;
+            const shareBtn = document.getElementById("btn-3");
             if (navigator.share) {
+                flashButton(shareBtn, null, 600);
                 try {
                     await navigator.share({ title: track?.title || composerName, text: shareText });
                 } catch (error) {
@@ -352,6 +371,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             } else {
                 try {
                     await navigator.clipboard.writeText(shareText);
+                    flashButton(shareBtn, "Copied");
                     console.log("Share: skopiowano do schowka", shareText);
                 } catch (error) {
                     console.error("Share fallback error:", error);
@@ -564,10 +584,14 @@ If you're here, I hope you find something worth listening to today.
                     // Inny tekst niż na ekranie głównym — bez linku do instalacji apki.
                     const shareText = `I listened to ${moment.title} by ${moment.artist}. You might like it too.`;
                     if (navigator.share) {
+                        flashButton(btn, null, 600);
                         try { await navigator.share({ text: shareText }); }
                         catch (err) { if (err.name !== "AbortError") console.error(err); }
                     } else {
-                        try { await navigator.clipboard.writeText(shareText); }
+                        try {
+                            await navigator.clipboard.writeText(shareText);
+                            flashButton(btn, "Copied");
+                        }
                         catch (err) { console.error(err); }
                     }
                 });
