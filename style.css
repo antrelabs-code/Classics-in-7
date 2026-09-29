@@ -630,7 +630,7 @@ body {
 /* Discover More żyje teraz wewnątrz main-track-card, więc nie potrzebuje
    własnego tła/ramki/notcha — tylko cienkiego separatora od reszty karty. */
 .discover-more-section {
-    margin: 10px 0 0 0;
+    margin: 10px 0 -14px 0;
     border-top: 1px solid var(--color-border);
     overflow: hidden;
     position: relative;
@@ -642,10 +642,10 @@ body {
     align-items: center;
     justify-content: flex-end;
     gap: var(--space-3);
-    width: 100%;
+    width: calc(100% - var(--content-gutter));
     box-sizing: border-box;
-    padding: var(--space-5) 0;
-    margin: 0 0 16px 0;
+    padding: var(--space-5) var(--content-gutter);
+    margin: 0 0 16px var(--content-gutter);
     transform: none;
     background: transparent;
     border: 1px solid var(--color-border);
@@ -671,7 +671,7 @@ body {
 /* Wspólny układ przycisków dolnych sekcji */
 .discover-toggle-btn {
     width: 100%;
-    min-height: 56px;
+    min-height: 48px;
     background: transparent;
     border: none;
     color: var(--color-accent);
