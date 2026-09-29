@@ -642,10 +642,11 @@ body {
     align-items: center;
     justify-content: flex-end;
     gap: var(--space-3);
-    width: calc(100% - var(--content-gutter));
+    width: 100%;
     box-sizing: border-box;
     padding: var(--space-5) var(--content-gutter);
-    margin: 0 0 16px var(--content-gutter);
+    margin: 0 0 16px 0;
+    -webkit-tap-highlight-color: transparent;
     transform: none;
     background: transparent;
     border: 1px solid var(--color-border);
@@ -656,16 +657,6 @@ body {
     letter-spacing: 1.1px;
     text-decoration: none;
     text-transform: uppercase;
-    transition: background 0.2s ease, border-color 0.2s ease;
-}
-
-.go-deeper-bar:hover {
-    background: rgba(212, 175, 55, 0.06);
-    border-color: var(--color-accent);
-}
-
-.go-deeper-bar:hover .external-link-icon {
-    transform: translate(1px, -1px);
 }
 
 /* Wspólny układ przycisków dolnych sekcji */
@@ -686,8 +677,10 @@ body {
     transition: background 0.2s ease;
 }
 
-.discover-toggle-btn:hover {
-    background: rgba(255, 255, 255, 0.02);
+@media (hover: hover) {
+    .discover-toggle-btn:hover {
+        background: rgba(255, 255, 255, 0.02);
+    }
 }
 
 /* When expanded, COLLAPSE sits directly after the last work instead of
@@ -877,10 +870,17 @@ body {
     transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 
-.btn-custom:hover {
-    background-color: var(--color-surface-hover-strong);
-    color: var(--color-text-strong);
-    border-color: var(--color-accent);
+/* Hover tylko na urządzeniach z myszką - na dotyku zostawał "przyklejony" po dotknięciu */
+@media (hover: hover) {
+    .btn-custom:hover {
+        background-color: var(--color-surface-hover-strong);
+        color: var(--color-text-strong);
+        border-color: var(--color-accent);
+    }
+}
+
+.btn-custom {
+    -webkit-tap-highlight-color: transparent;
 }
 
 .btn-custom.btn-2.is-playing {
