@@ -671,7 +671,7 @@ body {
 /* Wspólny układ przycisków dolnych sekcji */
 .discover-toggle-btn {
     width: 100%;
-    min-height: 34px;
+    min-height: 32px;
     background: transparent;
     border: none;
     color: var(--color-accent);
