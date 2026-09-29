@@ -1,4 +1,25 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+/* Inter is self-hosted (no request to Google Fonts, so no visitor IP leaves the site).
+   Put these two variable-font files in /fonts (from the npm package @fontsource-variable/inter,
+   folder "files"; Inter is licensed under the SIL OFL, which allows self-hosting).
+   "latin-ext" is needed for composer names such as Dvořák or Górecki.
+   Until the files are added, the system font stack from --font-family-base is used. */
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 100 900;
+    font-display: swap;
+    src: url('fonts/inter-latin-wght-normal.woff2') format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 100 900;
+    font-display: swap;
+    src: url('fonts/inter-latin-ext-wght-normal.woff2') format('woff2');
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
 
 /* ========================================
    1. TOKENS
@@ -347,13 +368,14 @@ body {
 }
 
 .menu-hint {
-    font-size: var(--menu-font-xs);
+    font-size: var(--menu-font-body);
+    line-height: 1.5;
     color: var(--color-text-faint);
     margin: 6px 0 0 0 !important;
 }
 
 .menu-privacy-text {
-    font-size: var(--menu-font-sm);
+    font-size: var(--menu-font-body);
     color: var(--color-text-light);
     line-height: 1.5;
 }
@@ -375,13 +397,13 @@ body {
 }
 
 .menu-version-text {
-    font-size: var(--menu-font-sm);
+    font-size: var(--menu-font-body);
     color: var(--color-text-muted);
 }
 
 .menu-feedback-btn {
     display: block;
-    margin-top: 4px;
+    margin-top: 10px;
 }
 
 /* Karty w My Moments */
@@ -462,7 +484,7 @@ body {
     min-height: 44px;
     color: var(--color-text-body);
     text-decoration: none;
-    font-size: var(--menu-font-item);
+    font-size: var(--menu-font-body);
     font-weight: 500;
     letter-spacing: 0.05em;
     text-transform: uppercase;
@@ -1074,9 +1096,9 @@ iframe[src*="youtube.com/embed/"] {
    CSS-09 — final menu readability pass
 ======================================== */
 
-/* Feedback action should read as a real action, not as helper text. */
+/* Feedback action: ten sam rozmiar co pozostałe przyciski menu (Back / Main / Clear). */
 .menu-feedback-btn {
-    font-size: var(--menu-font-body);
+    font-size: var(--menu-font-sm);
     font-weight: 600;
     padding: 10px 12px;
 }
@@ -1120,11 +1142,5 @@ iframe[src*="youtube.com/embed/"] {
 /* Supporting feedback copy should be readable at the same level as the
    feedback action, without changing the main card typography. */
 #panel-version-feedback .menu-hint {
-    font-size: var(--menu-font-body);
-    line-height: 1.5;
     color: var(--color-text-body);
-}
-
-#panel-version-feedback .menu-feedback-btn {
-    font-size: var(--menu-font-body);
 }

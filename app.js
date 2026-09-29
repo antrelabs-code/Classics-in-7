@@ -301,13 +301,27 @@ document.addEventListener("DOMContentLoaded", async () => {
             createYouTubePlayer();
         };
 
-        // Load the official YouTube IFrame API once.
-        if (!document.getElementById("youtube-iframe-api")) {
+        // Privacy: the official YouTube IFrame API (and any connection to youtube.com) is loaded
+        // only when the listener first presses PLAY ME, so a plain visit sends nothing to Google.
+        // Set to false to preload it on page load instead (first tap starts faster, especially on
+        // iOS, but the visitor's IP reaches YouTube on every visit).
+        const LOAD_YOUTUBE_ON_DEMAND = true;
+
+        function loadYouTubeApi() {
+            if (document.getElementById("youtube-iframe-api")) return;
             const script = document.createElement("script");
             script.id = "youtube-iframe-api";
             script.src = "https://www.youtube.com/iframe_api";
+            script.onerror = () => {
+                script.remove(); // allow a retry on the next tap
+                pendingPlay = false;
+                updatePlayButton();
+                console.error("YouTube IFrame API failed to load (offline?).");
+            };
             document.head.appendChild(script);
         }
+
+        if (!LOAD_YOUTUBE_ON_DEMAND) loadYouTubeApi();
 
         async function playSelectedTrack() {
             const track = getSelectedTrack();
@@ -318,7 +332,12 @@ document.addEventListener("DOMContentLoaded", async () => {
 
             pendingPlay = true;
             if (!ytPlayer) {
-                if (!createYouTubePlayer()) return;
+                if (!createYouTubePlayer()) {
+                    // API not loaded yet: load it now. onYouTubeIframeAPIReady -> onReady
+                    // will resume playback because pendingPlay is set.
+                    loadYouTubeApi();
+                    return;
+                }
             }
             if (!ytApiReady || !ytPlayer || typeof ytPlayer.loadVideoById !== "function") return;
 
@@ -654,3 +673,13 @@ If you're here, I hope you find something worth listening to today.
         console.error("Error loading Classics in 7 content:", error);
     }
 });
+
+// PWA: offline shell + installability. Registered outside the main handler so it works
+// even on days without a content card.
+if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+        navigator.serviceWorker.register("sw.js").catch(error => {
+            console.error("Service worker registration failed:", error);
+        });
+    });
+}
