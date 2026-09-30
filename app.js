@@ -673,13 +673,3 @@ If you're here, I hope you find something worth listening to today.
         console.error("Error loading Classics in 7 content:", error);
     }
 });
-
-// PWA: offline shell + installability. Registered outside the main handler so it works
-// even on days without a content card.
-if ("serviceWorker" in navigator) {
-    window.addEventListener("load", () => {
-        navigator.serviceWorker.register("sw.js").catch(error => {
-            console.error("Service worker registration failed:", error);
-        });
-    });
-}

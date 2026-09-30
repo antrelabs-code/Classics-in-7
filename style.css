@@ -1,8 +1,7 @@
-/* Inter is self-hosted (no request to Google Fonts, so no visitor IP leaves the site).
-   Put these two variable-font files in /fonts (from the npm package @fontsource-variable/inter,
-   folder "files"; Inter is licensed under the SIL OFL, which allows self-hosting).
+/* Inter is self-hosted from /fonts (no request to Google Fonts, so no visitor IP leaves the site).
+   If your file names differ, change only the two url(...) paths below.
    "latin-ext" is needed for composer names such as Dvořák or Górecki.
-   Until the files are added, the system font stack from --font-family-base is used. */
+   If a file is missing, the system font stack from --font-family-base is used. */
 @font-face {
     font-family: 'Inter';
     font-style: normal;
